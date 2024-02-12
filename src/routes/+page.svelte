@@ -3,7 +3,7 @@
     let each = [0,0,0,0,0,0,0,0,0,0]
 </script>
 
-<div class="w-full max-w-2xl mx-auto flex flex-col gap-6">
+<div class="w-full max-w-2xl mx-auto flex flex-col gap-4">
     {#each each as item, i}
     <Card.Root>
         <Card.Image>
