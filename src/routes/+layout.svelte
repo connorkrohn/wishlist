@@ -8,7 +8,7 @@
 
 <div class="fixed top-0 inset-x-0 h-32 text-background bg-gradient-to-b from-current to-transparent"></div>
 
-<header class="fixed flex gap-4 justify-between items-center top-0 h-12 m-4 px-2 rounded-xl border bg-card text-card-foreground shadow-2xl">
+<header class="fixed flex gap-4 justify-between items-center top-0 h-12 m-4 mt-6 px-2 rounded-xl border bg-card text-card-foreground shadow-xl">
 	<h1 class="ml-4">Connor's Wishlist</h1>
 	<Button on:click={toggleMode} variant="ghost" size="icon" class="h-8 w-8">
 		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0">
