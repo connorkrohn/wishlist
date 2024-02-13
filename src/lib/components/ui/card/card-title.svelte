@@ -8,13 +8,13 @@
 	};
 
 	let className: $$Props["class"] = undefined;
-	export let tag: $$Props["tag"] = "h3";
+	export let tag: $$Props["tag"] = "h2";
 	export { className as class };
 </script>
 
 <svelte:element
 	this={tag}
-	class={cn("font-semibold leading-none tracking-tight", className)}
+	class={cn("text-3xl font-black leading-none tracking-tight", className)}
 	{...$$restProps}
 >
 	<slot />
