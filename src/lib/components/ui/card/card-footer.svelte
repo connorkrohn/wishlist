@@ -8,6 +8,6 @@
 	export { className as class };
 </script>
 
-<div class={cn("col-start-2", className)} {...$$restProps}>
+<div class={cn("col-start-2 overflow-hidden", className)} {...$$restProps}>
 	<slot />
 </div>
