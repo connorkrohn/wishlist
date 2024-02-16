@@ -1,5 +1,6 @@
 <script>
     import * as Card from "$lib/components/ui/card";
+    import { Badge } from "$lib/components/ui/badge";
     let each = [0,0,0,0,0,0,0,0,0,0]
 </script>
 
@@ -17,7 +18,11 @@
           <p>Card Content</p>
         </Card.Content>
         <Card.Footer>
-          <p>Card Footer</p>
+          <div class="flex gap-2">
+            <Badge variant="default">Amazon</Badge>
+            <Badge variant="default">The Iconic</Badge>
+            <Badge variant="default">Rebel</Badge>
+          </div>
         </Card.Footer>
       </Card.Root>
       {/each}
