@@ -18,9 +18,11 @@
           <p>Card Content</p>
         </Card.Content>
         <Card.Footer>
-          <Badge variant="secondary">Amazon</Badge>
-          <Badge variant="secondary">The Iconic</Badge>
-          <Badge variant="secondary">Rebel</Badge>
+          <div class="flex gap-2">
+            <Badge variant="default">Amazon</Badge>
+            <Badge variant="default">The Iconic</Badge>
+            <Badge variant="default">Rebel</Badge>
+          </div>
         </Card.Footer>
       </Card.Root>
       {/each}
