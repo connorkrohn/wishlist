@@ -1,7 +1,11 @@
-<script>
+<script lang="ts">
+    import type { PageData } from './$types';
     import * as Card from "$lib/components/ui/card";
     import { Badge } from "$lib/components/ui/badge";
     let each = [0,0,0,0,0,0,0,0,0,0]
+
+    export let data: PageData;
+    console.log(data);
 </script>
 
 <div class="w-full max-w-2xl mx-auto flex flex-col gap-4">
