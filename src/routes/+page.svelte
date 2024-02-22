@@ -14,7 +14,7 @@
             {#if item.image}
                 <img src={item.image} alt="" class="bg-white">
             {:else}
-                <div class="grid place-items-center aspect-square bg-muted">
+                <div class="grid place-items-center h-full bg-muted">
                     <span>No Image</span>
                 </div>
             {/if}
