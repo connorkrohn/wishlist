@@ -8,7 +8,7 @@ const notion = new Client({
 });
 
 export const load: PageServerLoad = async () => {
-    let wishlist: object[] = [];
+  let wishlist: { title: string, price: number}[] = [];
 	const { results } = await notion.databases.query({ database_id: NOTION_WISHLIST_ID });
 
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
