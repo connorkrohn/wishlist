@@ -7,6 +7,7 @@
 <ModeWatcher />
 
 <div class="fixed top-0 inset-x-0 h-32 text-background bg-gradient-to-b from-current to-transparent pointer-events-none"></div>
+<div class="fixed bottom-0 inset-x-0 h-20 text-background bg-gradient-to-t from-current to-transparent pointer-events-none"></div>
 
 <header class="fixed flex gap-4 justify-between items-center top-0 h-12 m-4 mt-6 px-2 rounded-xl border bg-card text-card-foreground shadow-xl">
 	<h1 class="ml-4">Connor's Wishlist</h1>
