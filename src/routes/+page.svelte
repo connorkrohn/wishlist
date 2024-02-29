@@ -26,13 +26,13 @@
         <Card.Content>
           <p>Card Content</p>
         </Card.Content>
-        <Card.Footer>
+        <!-- <Card.Footer>
           <div class="flex gap-2">
             <Badge variant="default">Amazon</Badge>
             <Badge variant="default">The Iconic</Badge>
             <Badge variant="default">Rebel</Badge>
           </div>
-        </Card.Footer>
+        </Card.Footer> -->
       </Card.Root>
       {/each}
 </div>
