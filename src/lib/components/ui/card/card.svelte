@@ -10,7 +10,7 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
-	class={cn("rounded-xl border bg-card text-card-foreground grid grid-cols-[min(200px,_40%)_1fr] grid-rows-[minmax(0,_auto)_1fr_minmax(0,_auto)] p-3 gap-x-3 text-left", className)}
+	class={cn("rounded-xl border bg-card text-card-foreground grid grid-cols-[min(170px,_40%)_1fr] grid-rows-[minmax(0,_auto)_1fr_minmax(0,_auto)] p-3 gap-x-3 text-left", className)}
 	{...$$restProps}
 	on:click
 	on:focusin

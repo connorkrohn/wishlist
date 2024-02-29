@@ -7,7 +7,7 @@
     export let data: PageData;
 </script>
 
-<div class="w-full max-w-2xl mx-auto flex flex-col gap-4">
+<div class="w-full max-w-xl mx-auto flex flex-col gap-4">
     {#each data.wishlist as item, i}
     <Card.Root>
         <Card.Image>
