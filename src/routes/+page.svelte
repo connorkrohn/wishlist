@@ -23,9 +23,11 @@
           <Card.Title>{item.title}</Card.Title>
           <Card.Description>${item.price ? item.price : "--"}</Card.Description>
         </Card.Header>
-        <Card.Content>
-          <p>Card Content</p>
-        </Card.Content>
+        {#if item.note}
+            <Card.Content>
+              <p>{item.note}</p>
+            </Card.Content>
+        {/if}
         <!-- <Card.Footer>
           <div class="flex gap-2">
             <Badge variant="default">Amazon</Badge>
