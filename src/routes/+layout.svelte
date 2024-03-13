@@ -9,8 +9,9 @@
 <div class="fixed top-0 inset-x-0 h-32 text-background bg-gradient-to-b from-current to-transparent pointer-events-none"></div>
 <div class="fixed bottom-0 inset-x-0 h-20 text-background bg-gradient-to-t from-current to-transparent pointer-events-none"></div>
 
+
 <header class="fixed flex gap-4 justify-between items-center top-0 h-12 m-4 mt-6 px-2 rounded-xl border bg-card text-card-foreground shadow-xl">
-	<h1 class="ml-4">Connor's Wishlist</h1>
+	<a href="/"><h1 class="ml-4">Connor's Wishlist</h1></a>
 	<Button on:click={toggleMode} variant="ghost" size="icon" class="h-8 w-8">
 		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0">
 			<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
@@ -21,6 +22,7 @@
 		<span class="sr-only">Toggle theme</span>
 	  </Button>
 </header>
+
 
 <div class="w-full p-4 py-24 grid text-center">
 	<slot />
