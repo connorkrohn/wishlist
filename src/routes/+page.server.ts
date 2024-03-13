@@ -19,7 +19,7 @@ export const load: PageServerLoad = async () => {
                 id: e.id,
                 title: resultsProps.Title.title[0].plain_text,
                 price: resultsProps.Price.number,
-                image: resultsProps.Image.files[0]?.file.url,
+                image: resultsProps.Image.files[0]?.external?.url ? resultsProps.Image.files[0]?.external?.url : resultsProps.Image.files[0]?.file?.url,
                 note: resultsProps.Notes.rich_text[0]?.plain_text
             }
         ];

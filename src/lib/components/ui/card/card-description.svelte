@@ -11,3 +11,10 @@
 <p class={cn("text-xs text-muted-foreground uppercase font-bold", className)} {...$$restProps}>
 	<slot />
 </p>
+
+<style>
+    .the-price {
+        --id: the-price;
+        view-transition-name: var(--id);
+    }
+</style>

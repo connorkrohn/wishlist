@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+::view-transition-group(the-card),
+::view-transition-group(the-img),
+::view-transition-group(the-title),
+::view-transition-group(the-price) {
+  @apply z-30;
+}
+
   :root {
     --background: 240 10% 97%;
     --foreground: 240 10% 3.9%;
