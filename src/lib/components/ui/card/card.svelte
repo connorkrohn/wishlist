@@ -20,3 +20,10 @@
 >
 	<slot />
 </div>
+
+<style>
+    .the-card {
+        --id: the-card;
+        view-transition-name: var(--id);
+    }
+</style>

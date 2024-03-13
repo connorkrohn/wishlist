@@ -2,15 +2,29 @@
 	import '../app.pcss';
 	import { ModeWatcher, toggleMode } from "mode-watcher";
 	import { Button } from "$lib/components/ui/button";
+	import { onNavigate } from '$app/navigation';
+
+	onNavigate((navigation) => {
+	// @ts-ignore
+		if (!document.startViewTransition) return
+
+		return new Promise((resolve) => {
+		// @ts-ignore
+			document.startViewTransition(async () => {
+				resolve()
+				await navigation.complete
+			})
+		})
+	});
 </script>
 
 <ModeWatcher />
 
-<div class="fixed top-0 inset-x-0 h-32 text-background bg-gradient-to-b from-current to-transparent pointer-events-none"></div>
-<div class="fixed bottom-0 inset-x-0 h-20 text-background bg-gradient-to-t from-current to-transparent pointer-events-none"></div>
+<div class="fixed z-40 top-0 inset-x-0 h-32 text-background bg-gradient-to-b from-current to-transparent pointer-events-none" style="view-transition-name: fade-top;"></div>
+<div class="fixed z-40 bottom-0 inset-x-0 h-20 text-background bg-gradient-to-t from-current to-transparent pointer-events-none" style="view-transition-name: fade-bottom;"></div>
 
 
-<header class="fixed flex gap-4 justify-between items-center top-0 h-12 m-4 mt-6 px-2 rounded-xl border bg-card text-card-foreground shadow-xl">
+<header class="fixed z-50 flex gap-4 justify-between items-center top-0 h-12 m-4 mt-6 px-2 rounded-xl border bg-card text-card-foreground shadow-xl">
 	<a href="/"><h1 class="ml-4">Connor's Wishlist</h1></a>
 	<Button on:click={toggleMode} variant="ghost" size="icon" class="h-8 w-8">
 		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0">
@@ -27,3 +41,9 @@
 <div class="w-full p-4 py-24 grid text-center">
 	<slot />
 </div>
+
+<style>
+    header {
+      view-transition-name: header;
+    }
+</style>
