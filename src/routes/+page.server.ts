@@ -8,15 +8,15 @@ const notion = new Client({
 });
 
 export const load: PageServerLoad = async () => {
-  let wishlist: { title: string, price: number, image: string, note: string }[] = [];
+  let wishlist: { id: string, title: string, price: number, image: string, note: string }[] = [];
 	const { results } = await notion.databases.query({ database_id: NOTION_WISHLIST_ID });
-
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	results.map((e: any) => {
         const resultsProps = e.properties;
         wishlist = [
             ...wishlist,
             {
+                id: e.id,
                 title: resultsProps.Title.title[0].plain_text,
                 price: resultsProps.Price.number,
                 image: resultsProps.Image.files[0]?.external?.url ? resultsProps.Image.files[0]?.external?.url : resultsProps.Image.files[0]?.file?.url,
