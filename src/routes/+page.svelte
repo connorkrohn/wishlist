@@ -1,14 +1,23 @@
 <script lang="ts">
     import type { PageData } from './$types';
     import * as Card from "$lib/components/ui/card";
-    import { Badge } from "$lib/components/ui/badge";
-    let each = [0,0,0,0,0,0,0,0,0,0]
 
     export let data: PageData;
+
+    const placeholder = [0,0,0,0,0,0,0];
 </script>
 
 <div class="w-full max-w-xl mx-auto flex flex-col gap-4">
-    {#each data.wishlist as item, i}
+  {#await data.wishlist}
+  {#each placeholder as item}
+  <Card.Root>
+      <Card.Image>
+        <div class="grid place-items-center h-full bg-muted"></div>
+      </Card.Image>
+  </Card.Root>
+  {/each}
+  {:then list}
+    {#each list as item}
     <Card.Root>
         <Card.Image>
             {#if item.image}
@@ -28,13 +37,9 @@
               <p>{item.note}</p>
             </Card.Content>
         {/if}
-        <!-- <Card.Footer>
-          <div class="flex gap-2">
-            <Badge variant="default">Amazon</Badge>
-            <Badge variant="default">The Iconic</Badge>
-            <Badge variant="default">Rebel</Badge>
-          </div>
-        </Card.Footer> -->
-      </Card.Root>
-      {/each}
+    </Card.Root>
+    {/each}
+  {:catch error}
+    <p>error loading comments: {error.message}</p>
+  {/await}
 </div>
