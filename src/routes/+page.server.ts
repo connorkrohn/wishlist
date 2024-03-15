@@ -7,17 +7,26 @@ const notion = new Client({
 	auth: NOTION_WISHLIST_SECRET
 });
 
-export const load: PageServerLoad = async () => {
-  const slowData = getSlowData();
+// time in milliseconds before resorting to data streaming
+const MAX_RESLOVE_TIME = 200;
 
+export const load: PageServerLoad = async () => {
+
+  // Promise race for data streaming 
+  const notionData = await Promise.race([delay(MAX_RESLOVE_TIME), streamNotionData()]);
+
+  // PagaData
   return {
-		wishlist: slowData
+    streamed: {
+      wishlist: notionData ? notionData as ReturnType<typeof streamNotionData> : streamNotionData()
+    }
 	};
 
-  async function getSlowData() {
+  // get Notion data via Promise
+  async function streamNotionData() {
     let wishlist: { title: string, price: number, image: string, note: string }[] = [];
     const { results } = await notion.databases.query({ database_id: NOTION_WISHLIST_ID });
-    results.map((e: any) => {
+    results.map((e) => {
             const resultsProps = e.properties;
             wishlist = [
                 ...wishlist,
@@ -30,5 +39,10 @@ export const load: PageServerLoad = async () => {
             ];
         });
     return wishlist
+  }
+
+  // delayed Promise for resolve race
+  function delay(ms: number) {
+    return new Promise(res => setTimeout(res, ms));
   }
 };

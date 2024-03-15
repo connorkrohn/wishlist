@@ -8,7 +8,7 @@
 </script>
 
 <div class="w-full max-w-xl mx-auto flex flex-col gap-4">
-  {#await data.wishlist}
+  {#await data.streamed.wishlist}
   {#each placeholder as item}
   <Card.Root>
       <Card.Image>
@@ -43,3 +43,4 @@
     <p>error loading comments: {error.message}</p>
   {/await}
 </div>
+<img src="" alt="">
