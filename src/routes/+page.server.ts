@@ -30,6 +30,7 @@ export const load: PageServerLoad = async () => {
       wishlist = [ 
         ...wishlist,
         {
+		id: page.id,
             title: wishlistItem.Title.title[0].plain_text,
             price: wishlistItem.Price.number,
             image: wishlistItem.Image.files[0]?.external?.url ? wishlistItem.Image.files[0]?.external?.url : wishlistItem.Image.files[0]?.file?.url,
