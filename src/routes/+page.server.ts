@@ -1,48 +1,43 @@
 import type { PageServerLoad } from './$types';
 import { NOTION_WISHLIST_SECRET, NOTION_WISHLIST_ID } from '$env/static/private';
-import { Client } from '@notionhq/client';
+import { Client, isFullPage } from '@notionhq/client';
+
+// custom types based off return Notion JSON
+export interface WishlistItem {
+  Title: { title: [ { plain_text: string } ] },
+  Price: { number: number },
+  Image: { files: [ { external: { url : string } , file: { url : string } } ] },
+  Notes: { rich_text: [ { plain_text: string } ] }
+}
 
 // Initializing a client
-const notion = new Client({
-	auth: NOTION_WISHLIST_SECRET
-});
-
-// time in milliseconds before resorting to data streaming
-const MAX_RESLOVE_TIME = 200;
+const notion = new Client({ auth: NOTION_WISHLIST_SECRET });
 
 export const load: PageServerLoad = async () => {
-
-  // Promise race for data streaming 
-  const notionData = await Promise.race([delay(MAX_RESLOVE_TIME), streamNotionData()]);
-
   // PagaData
   return {
     streamed: {
-      wishlist: notionData ? notionData as ReturnType<typeof streamNotionData> : streamNotionData()
+      wishlist: streamNotionData()
     }
 	};
-
   // get Notion data via Promise
   async function streamNotionData() {
+    console.log("querying Notion");
     let wishlist: { title: string, price: number, image: string, note: string }[] = [];
     const { results } = await notion.databases.query({ database_id: NOTION_WISHLIST_ID });
-    results.map((e) => {
-            const resultsProps = e.properties;
-            wishlist = [
-                ...wishlist,
-                {
-                    title: resultsProps.Title.title[0].plain_text,
-                    price: resultsProps.Price.number,
-                    image: resultsProps.Image.files[0]?.external?.url ? resultsProps.Image.files[0]?.external?.url : resultsProps.Image.files[0]?.file?.url,
-                    note: resultsProps.Notes.rich_text[0]?.plain_text
-                }
-            ];
-        });
+    for (const page of results) {
+      if (!isFullPage(page)) continue
+      const wishlistItem = page.properties as unknown as WishlistItem
+      wishlist = [ 
+        ...wishlist,
+        {
+            title: wishlistItem.Title.title[0].plain_text,
+            price: wishlistItem.Price.number,
+            image: wishlistItem.Image.files[0]?.external?.url ? wishlistItem.Image.files[0]?.external?.url : wishlistItem.Image.files[0]?.file?.url,
+            note: wishlistItem.Notes.rich_text[0]?.plain_text
+        }
+      ];
+    }
     return wishlist
-  }
-
-  // delayed Promise for resolve race
-  function delay(ms: number) {
-    return new Promise(res => setTimeout(res, ms));
   }
 };
