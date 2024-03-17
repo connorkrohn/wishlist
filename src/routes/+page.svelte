@@ -1,6 +1,7 @@
 <script lang="ts">
     import type { PageData } from './$types';
     import * as Card from "$lib/components/ui/card";
+    import { Skeleton } from "$lib/components/ui/skeleton";
 
     export let data: PageData;
 
@@ -10,10 +11,14 @@
 <div class="w-full max-w-xl mx-auto flex flex-col gap-4">
   {#await data.streamed.wishlist}
   {#each placeholder as item}
-  <Card.Root>
+  <Card.Root class="animate-pulse rounded-md bg-card/70 border-transparent">
       <Card.Image>
-        <div class="grid place-items-center h-full bg-muted"></div>
+        <Skeleton class="h-full"></Skeleton>
       </Card.Image>
+      <Card.Header class="space-y-2">
+        <Card.Title><Skeleton class="w-full h-4"></Skeleton></Card.Title>
+        <Card.Description><Skeleton class="w-8 h-3"></Skeleton></Card.Description>
+      </Card.Header>
   </Card.Root>
   {/each}
   {:then list}
@@ -21,7 +26,7 @@
     <Card.Root>
         <Card.Image>
             {#if item.image}
-                <img src={item.image} alt="">
+                <img src={item.image} alt="" class="bg-white h-full">
             {:else}
                 <div class="grid place-items-center h-full bg-muted">
                     <span>No Image</span>

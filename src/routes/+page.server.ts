@@ -22,7 +22,6 @@ export const load: PageServerLoad = async () => {
 	};
   // get Notion data via Promise
   async function streamNotionData() {
-    console.log("querying Notion");
     let wishlist: { title: string, price: number, image: string, note: string }[] = [];
     const { results } = await notion.databases.query({ database_id: NOTION_WISHLIST_ID });
     for (const page of results) {
