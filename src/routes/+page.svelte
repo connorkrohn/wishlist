@@ -23,29 +23,44 @@
   {/each}
   {:then list}
     {#each list as item}
-    <Card.Root>
+    <a href="/{item.id}">
+    <Card.Root class="the-card" style="--id: card-{item.id}">
         <Card.Image>
             {#if item.image}
-                <img src={item.image} alt="" class="bg-white h-full">
-            {:else}
-                <div class="grid place-items-center h-full bg-muted">
-                    <span>No Image</span>
-                </div>
-            {/if}
+                    <img src={item.image} alt="" class="bg-white rounded-lg aspect-square object-cover the-img" style="--id: img-{item.id}">
+                {:else}
+                    <div class="grid place-items-center h-full bg-muted">
+                        <span>No Image</span>
+                    </div>
+                {/if}
         </Card.Image>
         <Card.Header>
-          <Card.Title>{item.title}</Card.Title>
-          <Card.Description>${item.price ? item.price : "--"}</Card.Description>
+          <Card.Title><span class="the-title" style="--id: title-{item.id}">{item.title}</span></Card.Title>
+              <Card.Description class="the-price" style="--id: price-{item.id}">${item.price ? item.price : "--"}</Card.Description>
         </Card.Header>
         {#if item.note}
             <Card.Content>
-              <p>{item.note}</p>
+             <p class="the-note" style="--id: note-{item.id}">{item.note}</p>
             </Card.Content>
         {/if}
     </Card.Root>
+</a>
     {/each}
   {:catch error}
     <p>error loading comments: {error.message}</p>
   {/await}
 </div>
-<img src="" alt="">
+<style>
+    .the-img {
+        --id: the-imge;
+        view-transition-name: var(--id);
+    }
+    .the-title {
+        --id: the-title;
+        view-transition-name: var(--id);
+    }
+    .the-note {
+        --id: the-note;
+        view-transition-name: var(--id);
+    }
+</style>
