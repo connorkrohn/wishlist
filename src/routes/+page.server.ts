@@ -22,7 +22,7 @@ export const load: PageServerLoad = async () => {
 	};
   // get Notion data via Promise
   async function streamNotionData() {
-    let wishlist: { title: string, price: number, image: string, note: string }[] = [];
+    let wishlist: { id: string, title: string, price: number, image: string, note: string }[] = [];
     const { results } = await notion.databases.query({ database_id: NOTION_WISHLIST_ID });
     for (const page of results) {
       if (!isFullPage(page)) continue
@@ -30,7 +30,7 @@ export const load: PageServerLoad = async () => {
       wishlist = [ 
         ...wishlist,
         {
-		id: page.id,
+		        id: page.id,
             title: wishlistItem.Title.title[0].plain_text,
             price: wishlistItem.Price.number,
             image: wishlistItem.Image.files[0]?.external?.url ? wishlistItem.Image.files[0]?.external?.url : wishlistItem.Image.files[0]?.file?.url,
