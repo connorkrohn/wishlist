@@ -2,7 +2,7 @@
 	import '../app.pcss';
 	import { ModeWatcher, toggleMode } from "mode-watcher";
 	import { Button } from "$lib/components/ui/button";
-	import logo from "$lib/assets/logo.svg"
+	import Logo from "$lib/assets/Logo.svelte"
 </script>
 
 <ModeWatcher />
@@ -10,7 +10,7 @@
 <div class="fixed top-0 inset-x-0 h-32 text-background bg-gradient-to-b from-current to-transparent pointer-events-none"></div>
 
 <header class="fixed flex gap-2 justify-between items-center top-0 h-12 m-4 mt-6 px-3 rounded-xl border bg-card text-card-foreground shadow-xl">
-	<img src="{logo}" alt="" class="h-6" />
+	<Logo class="h-6" />
 	<h1 class="">Wishlist</h1>
 </header>
 
