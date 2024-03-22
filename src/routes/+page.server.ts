@@ -13,10 +13,10 @@ export interface WishlistItem {
 // Initializing a client
 const notion = new Client({ auth: NOTION_WISHLIST_SECRET });
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async ({isDataRequest}) => {
 	// PagaData
 	return {
-		wishlist: streamNotionData()
+		wishlist: isDataRequest ? streamNotionData() : await streamNotionData() // only stream promise when client-side routing
 	};
 	// get Notion data via Promise
 	async function streamNotionData() {
