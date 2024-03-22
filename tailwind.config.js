@@ -59,6 +59,9 @@ const config = {
 			}
 		}
 	},
+	future: {
+		hoverOnlyWhenSupported: true,
+	  },
 };
 
 export default config;
