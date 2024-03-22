@@ -28,13 +28,6 @@
               <p>{item.note}</p>
             </Card.Content>
         {/if}
-        <!-- <Card.Footer>
-          <div class="flex gap-2">
-            <Badge variant="default">Amazon</Badge>
-            <Badge variant="default">The Iconic</Badge>
-            <Badge variant="default">Rebel</Badge>
-          </div>
-        </Card.Footer> -->
       </Card.Root>
       {/each}
 </div>
