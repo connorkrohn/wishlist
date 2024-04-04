@@ -17,7 +17,7 @@ export const load: PageServerLoad = async () => {
 	// PagaData
 	return {
 		// wishlist: isDataRequest ? streamNotionData() : await streamNotionData() // only stream promise when client-side routing
-		wishlist: await streamNotionData()
+		wishlist: streamNotionData()
 	};
 	// get Notion data via Promise
 	async function streamNotionData() {
