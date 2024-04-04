@@ -2,13 +2,19 @@
 	import type { PageData } from './$types';
 	import * as Card from '$lib/components/ui/card';
 	import { Skeleton } from '$lib/components/ui/skeleton';
+	import { fade } from 'svelte/transition';
 
 	export let data: PageData;
 	let placeholder = [0,0,0,0,0,0,0,0,0,0];
+	let visible = false
 </script>
 
-<div class="mx-auto flex w-full max-w-xl flex-col gap-4">
+<div class="mx-auto flex w-full max-w-xl flex-col gap-4" transition:fade={{duration: 5000}}>
 	{#await data.wishlist}
+	<div 
+		out:fade
+		on:outroend="{() => visible = true}">
+	</div>
 		{#each placeholder as item}
 		<Card.Root>
 			<Card.Image>
@@ -22,6 +28,8 @@
 		{/each}
 	{:then wishlist}
 		{#each wishlist as item, i}
+		{#if visible}
+			<div in:fade={{delay: 50*i, duration:200,}}>
 			<Card.Root>
 				<Card.Image>
 					{#if item.image}
@@ -42,6 +50,8 @@
 					</Card.Content>
 				{/if}
 			</Card.Root>
+		</div>
+		{/if}
 		{/each}
 	{/await}
 </div>
