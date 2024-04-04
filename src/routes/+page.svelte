@@ -6,7 +6,9 @@
 </script>
 
 <div class="mx-auto flex w-full max-w-xl flex-col gap-4">
-	{#await data.wishlist then wishlist}
+	{#await data.wishlist}
+		<span>loading data...</span>
+	{:then wishlist}
 		{#each wishlist as item, i}
 			<Card.Root>
 				<Card.Image>
