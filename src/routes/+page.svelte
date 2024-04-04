@@ -1,12 +1,26 @@
 <script lang="ts">
 	import type { PageData } from './$types';
 	import * as Card from '$lib/components/ui/card';
+	import { Skeleton } from '$lib/components/ui/skeleton';
 
 	export let data: PageData;
+	let placeholder = [0,0,0,0,0,0,0,0,0,0];
 </script>
 
 <div class="mx-auto flex w-full max-w-xl flex-col gap-4">
 	{#await data.wishlist}
+		{#each placeholder as item}
+		<Card.Root>
+			<Card.Image>
+				<Skeleton class="grid h-full place-items-center" />
+			</Card.Image>
+			<Card.Header>
+				<Card.Title><Skeleton class="w-full h-5 mb-1" /><Skeleton class="w-1/3 h-5 mb-1" /></Card.Title>
+				<Card.Description><Skeleton class="w-7 h-2" /></Card.Description>
+			</Card.Header>
+		</Card.Root>
+		{/each}
+		<Skeleton class="h-[20px] w-[100px] rounded-full" />
 		<span>loading data...</span>
 	{:then wishlist}
 		{#each wishlist as item, i}
