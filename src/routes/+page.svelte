@@ -17,7 +17,7 @@
 		class="hidden">
 	</div>
 		{#each placeholder as item}
-		<Card.Root>
+		<Card.Root class="bg-transparent border-transparent">
 			<Card.Image>
 				<Skeleton class="grid h-full place-items-center" />
 			</Card.Image>
