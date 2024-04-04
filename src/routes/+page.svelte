@@ -9,7 +9,7 @@
 	let visible = false
 </script>
 
-<div class="mx-auto flex w-full max-w-xl flex-col gap-4" transition:fade={{duration: 5000}}>
+<div class="mx-auto flex w-full max-w-xl flex-col gap-4">
 	{#await data.wishlist}
 	<div 
 		out:fade
