@@ -27,7 +27,7 @@
 			<Card.Root>
 				<Card.Image>
 					{#if item.image}
-						<img src={item.image} alt="" />
+						<img src={item.image} alt="" class="bg-white" loading="lazy"/>
 					{:else}
 						<div class="grid h-full place-items-center bg-muted">
 							<span>No Image</span>
