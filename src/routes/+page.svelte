@@ -12,8 +12,9 @@
 <div class="mx-auto flex w-full max-w-xl flex-col gap-4">
 	{#await data.wishlist}
 	<div 
-		out:fade
-		on:outroend="{() => visible = true}">
+		out:fade={{duration: 0}}
+		on:outroend="{() => visible = true}"
+		class="hidden">
 	</div>
 		{#each placeholder as item}
 		<Card.Root>
