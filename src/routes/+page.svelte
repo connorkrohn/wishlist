@@ -20,8 +20,6 @@
 			</Card.Header>
 		</Card.Root>
 		{/each}
-		<Skeleton class="h-[20px] w-[100px] rounded-full" />
-		<span>loading data...</span>
 	{:then wishlist}
 		{#each wishlist as item, i}
 			<Card.Root>
