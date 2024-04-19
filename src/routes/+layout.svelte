@@ -1,8 +1,39 @@
-<script>
+<script lang="ts">
 	import '../app.pcss';
 	import { ModeWatcher, toggleMode } from "mode-watcher";
 	import { Button } from "$lib/components/ui/button";
 	import Logo from "$lib/assets/Logo.svelte"
+	import { gsap } from "gsap/dist/gsap";
+  import { Flip } from "gsap/dist/Flip";
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
+	import { onMount } from 'svelte';
+
+	gsap.registerPlugin(Flip);
+
+	let state: Flip.FlipState;
+
+	onMount(() => {
+		state = Flip.getState("[data-flip-id='test0']", {
+			props: "fontWeight,fontSize,color",
+			simple: true,
+		});
+	});
+
+	beforeNavigate((navigation) => {
+		state = Flip.getState("[data-flip-id='test0']", {
+			props: "fontWeight,fontSize,color",
+			simple: true,
+		});
+	});
+
+	afterNavigate((navigation) => {
+		Flip.from(state, {
+			targets: document.querySelector("[data-flip-id='test0']"),
+			duration: 0.2,
+			ease: "power1.inOut",
+			absolute: true,
+		});
+	});
 </script>
 
 <ModeWatcher />

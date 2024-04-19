@@ -34,7 +34,7 @@
 					{/if}
 				</Card.Image>
 				<Card.Header>
-					<Card.Title>{item.title}</Card.Title>
+					<Card.Title data-flip-id="test{i}">{item.title}</Card.Title>
 					<Card.Description>${item.price ? item.price : '--'}</Card.Description>
 				</Card.Header>
 				{#if item.note}
