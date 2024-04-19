@@ -1,8 +1,48 @@
-<script>
+<script lang="ts">
+	import type { LayoutData } from './$types';
 	import '../app.pcss';
 	import { ModeWatcher, toggleMode } from "mode-watcher";
 	import { Button } from "$lib/components/ui/button";
 	import Logo from "$lib/assets/Logo.svelte"
+	import { count } from '$lib/stores';
+	import { onMount } from 'svelte';
+	import { gsap } from "gsap/dist/gsap";
+  import { Flip } from "gsap/dist/Flip";
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
+	export let data: LayoutData;
+
+	gsap.registerPlugin(Flip);
+	let state: Flip.FlipState;
+
+	onMount(async()=>{
+		count.set(await data.streamed.wishlist);
+		state = Flip.getState("[data-flip-id]", {
+			props: "borderRadius",
+			simple: true,
+		});
+	});
+	
+	beforeNavigate((navigation) => {
+		// gsap.set("[data-flip-id]", { y: -window.scrollY });
+		state = Flip.getState("[data-flip-id]", {
+			props: "borderRadius",
+			simple: true,
+		});
+	});
+
+	afterNavigate((navigation) => {
+		if(data.isDataRequest && $count !== undefined) {
+			Flip.from(state, {
+				targets: document.querySelectorAll("[data-flip-id]"),
+				simple: true,
+				duration: 0.2,
+				ease: "power1.inOut",
+				absolute: true,
+				zIndex: 99,
+			});
+		}		
+	});
+	
 </script>
 
 <ModeWatcher />
