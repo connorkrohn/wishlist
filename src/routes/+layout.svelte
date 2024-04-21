@@ -11,7 +11,7 @@
 
 <header class="fixed flex gap-2 justify-between items-center top-0 h-12 m-4 mt-6 px-3 rounded-xl border bg-card text-card-foreground shadow-xl">
 	<Logo class="h-6" />
-	<h1 class="">Wishlist</h1>
+	<a href="/"><h1 class="">Wishlist</h1></a>
 </header>
 
 <div class="absolute grid place-items-center top-6 right-6 h-12 px-2 text-card-foreground">

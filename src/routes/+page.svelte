@@ -22,6 +22,7 @@
 		{/each}
 	{:then wishlist}
 		{#each wishlist as item, i}
+		<a href="/{item.id}">
 			<Card.Root>
 				<Card.Image>
 					{#if item.image}
@@ -42,6 +43,7 @@
 					</Card.Content>
 				{/if}
 			</Card.Root>
+		</a>
 		{/each}
 	{/await}
 </div>

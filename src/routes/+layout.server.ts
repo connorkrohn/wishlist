@@ -1,4 +1,4 @@
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 import { NOTION_WISHLIST_SECRET, NOTION_WISHLIST_ID } from '$env/static/private';
 import { Client, isFullPage } from '@notionhq/client';
 
@@ -13,16 +13,16 @@ export interface WishlistItem {
 // Initializing a client
 const notion = new Client({ auth: NOTION_WISHLIST_SECRET });
 
-export const load: PageServerLoad = async () => {
+export const load: LayoutServerLoad = async () => {
 	// PagaData
 	return {
-		// wishlist: isDataRequest ? streamNotionData() : await streamNotionData() // only stream promise when client-side routing
 		wishlist: streamNotionData()
 	};
 	// get Notion data via Promise
 	async function streamNotionData() {
 		let wishlist: { id: string; title: string; price: number; image: string; note: string }[] = [];
 		const { results } = await notion.databases.query({ database_id: NOTION_WISHLIST_ID });
+    console.log("querying database");
 		for (const page of results) {
 			if (!isFullPage(page)) continue;
 			const wishlistItem = page.properties as unknown as WishlistItem;
