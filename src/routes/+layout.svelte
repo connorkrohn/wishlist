@@ -41,7 +41,7 @@
 				duration: 0.2,
 				ease: "power1.inOut",
 				absolute: true,
-				zIndex: 99,
+				zIndex: 30,
 			});
 		}		
 	});
@@ -50,14 +50,14 @@
 
 <ModeWatcher />
 
-<div class="fixed top-0 inset-x-0 h-32 text-background bg-gradient-to-b from-current to-transparent pointer-events-none"></div>
+<div class="fixed z-40 top-0 inset-x-0 h-32 text-background bg-gradient-to-b from-current to-transparent pointer-events-none"></div>
 
-<header class="fixed flex gap-2 justify-between items-center top-0 h-12 m-4 mt-6 px-3 rounded-xl border bg-card text-card-foreground shadow-xl">
+<header class="fixed z-50 flex gap-2 justify-between items-center top-0 h-12 m-4 mt-6 px-3 rounded-xl border bg-card text-card-foreground shadow-xl">
 	<Logo class="h-6" />
 	<h1 class="">Wishlist</h1>
 </header>
 
-<div class="absolute grid place-items-center top-6 right-6 h-12 px-2 text-card-foreground">
+<div class="absolute z-50 grid place-items-center top-6 right-6 h-12 px-2 text-card-foreground">
 	<Button on:click={toggleMode} variant="ghost" size="icon" class="h-8 w-8">
 		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0">
 			<path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
