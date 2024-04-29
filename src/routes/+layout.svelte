@@ -23,7 +23,7 @@
 	});
 	
 	beforeNavigate((navigation) => {
-		// gsap.set("[data-flip-id]", { y: -window.scrollY });
+		gsap.set("[data-flip-id]", { y: -window.scrollY });
 		state = Flip.getState("[data-flip-id]", {
 			props: "borderRadius",
 			simple: true,
@@ -32,6 +32,9 @@
 
 	afterNavigate((navigation) => {
 		if(data.isDataRequest && $count !== undefined) {
+			for (let el of state.elementStates) {
+				el.matrix.f += window.scrollY;
+			}
 			Flip.from(state, {
 				targets: document.querySelectorAll("[data-flip-id]"),
 				simple: true,
