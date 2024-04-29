@@ -6,44 +6,47 @@
 	import Logo from "$lib/assets/Logo.svelte"
 	import { count } from '$lib/stores';
 	import { onMount } from 'svelte';
-	import { gsap } from "gsap/dist/gsap";
+	import { gsap } from "gsap";
   import { Flip } from "gsap/dist/Flip";
 	import { afterNavigate, beforeNavigate } from '$app/navigation';
 	export let data: LayoutData;
 
 	gsap.registerPlugin(Flip);
 	let state: Flip.FlipState;
+	let internalNav = false;
 
 	onMount(async()=>{
 		count.set(await data.streamed.wishlist);
-		state = Flip.getState("[data-flip-id]", {
-			props: "borderRadius",
-			simple: true,
-		});
 	});
 	
-	beforeNavigate((navigation) => {
-		gsap.set("[data-flip-id]", { y: -window.scrollY });
+	beforeNavigate(() => {
+		internalNav = true;
 		state = Flip.getState("[data-flip-id]", {
 			props: "borderRadius",
 			simple: true,
 		});
+		for (const el of state.elementStates) {
+				el.matrix.f -= window.scrollY;
+			}
 	});
 
-	afterNavigate((navigation) => {
+	afterNavigate(() => {
+		// if (internalNav) {
 		if(data.isDataRequest && $count !== undefined) {
-			for (let el of state.elementStates) {
+			for (const el of state.elementStates) {
 				el.matrix.f += window.scrollY;
 			}
 			Flip.from(state, {
 				targets: document.querySelectorAll("[data-flip-id]"),
 				simple: true,
-				duration: 0.2,
-				ease: "power1.inOut",
+				duration: 0.3,
+				ease: "power3.inOut",
 				absolute: true,
 				zIndex: 30,
 			});
-		}		
+		}
+	// }
+		internalNav = false;
 	});
 	
 </script>
@@ -52,10 +55,12 @@
 
 <div class="fixed z-40 top-0 inset-x-0 h-32 text-background bg-gradient-to-b from-current to-transparent pointer-events-none"></div>
 
-<header class="fixed z-50 flex gap-2 justify-between items-center top-0 h-12 m-4 mt-6 px-3 rounded-xl border bg-card text-card-foreground shadow-xl">
+<a href="/">
+<header class="fixed z-50 flex gap-2 justify-between items-center top-0 left-1/2 -translate-x-1/2 h-12 my-4 mt-6 px-3 rounded-xl border bg-card text-card-foreground shadow-xl">
 	<Logo class="h-6" />
 	<h1 class="">Wishlist</h1>
 </header>
+</a>
 
 <div class="absolute z-50 grid place-items-center top-6 right-6 h-12 px-2 text-card-foreground">
 	<Button on:click={toggleMode} variant="ghost" size="icon" class="h-8 w-8">

@@ -8,6 +8,6 @@
 	export { className as class };
 </script>
 
-<div class={cn("inline-block rounded-lg overflow-hidden row-span-3 aspect-square", className)} {...$$restProps}>
+<div class={cn("inline-block overflow-hidden row-span-3 aspect-square", className)} {...$$restProps}>
 	<slot />
 </div>
