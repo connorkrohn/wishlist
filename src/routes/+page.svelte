@@ -25,7 +25,7 @@
 						{:else}
 							<div
 								data-flip-id="image{i}"
-								class="grid aspect-square h-full place-items-center rounded-md bg-muted"
+								class="grid aspect-square place-items-center rounded-md bg-muted"
 							>
 								<span>No Image</span>
 							</div>

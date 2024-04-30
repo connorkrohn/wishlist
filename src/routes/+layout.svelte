@@ -55,12 +55,12 @@
 
 <div class="fixed z-40 top-0 inset-x-0 h-32 text-background bg-gradient-to-b from-current to-transparent pointer-events-none"></div>
 
-<a href="/">
+
 <header class="fixed z-50 flex gap-2 justify-between items-center top-0 left-1/2 -translate-x-1/2 h-12 my-4 mt-6 px-3 rounded-xl border bg-card text-card-foreground shadow-xl">
 	<Logo class="h-6" />
-	<h1 class="">Wishlist</h1>
+	<a href="/"><h1 class="">Wishlist</h1></a>
 </header>
-</a>
+
 
 <div class="absolute z-50 grid place-items-center top-6 right-6 h-12 px-2 text-card-foreground">
 	<Button on:click={toggleMode} variant="ghost" size="icon" class="h-8 w-8">
@@ -74,6 +74,6 @@
 	</Button>
 </div>
 
-<div class="w-full p-4 py-24 grid text-center">
+<div class="w-full h-full p-4 py-24 grid text-center">
 	<slot />
 </div>

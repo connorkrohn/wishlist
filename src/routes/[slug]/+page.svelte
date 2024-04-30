@@ -3,35 +3,48 @@
 	import { count } from '$lib/stores';
 	import type { PageData } from './$types';
 	import { Skeleton } from '$lib/components/ui/skeleton';
+	import { derived } from 'svelte/store';
 
 	export let data: PageData;
+
+  const item = derived(count, $count => $count?.filter((obj) => obj.id == $page.params.slug)[0]);
+  const itemIndex = derived(count, $count => $count?.findIndex((obj) => obj.id == $page.params.slug));
+
+  let itemStreamed: Awaited<typeof data.streamed.wishlist>[0],
+  itemStreamedIndex: number;
+  
+  data.streamed.wishlist.then(result => {
+    itemStreamed = result.filter((obj) => obj.id == $page.params.slug)[0]
+    itemStreamedIndex = result.findIndex((obj) => obj.id == $page.params.slug)
+  })
 </script>
 
 <div class="mx-auto flex w-full max-w-xl flex-col gap-4">
 	{#if data.isDataRequest && $count !== undefined}
-		{#if $count.filter((obj) => obj.id == $page.params.slug)[0].image}
+		{#if $item.image}
 			<img
 				alt=""
-				src={$count.filter((obj) => obj.id == $page.params.slug)[0].image}
-				data-flip-id="image{$count.findIndex((obj) => obj.id == $page.params.slug)}"
+				src={$item.image}
+				data-flip-id="image{$itemIndex}"
 				class="aspect-square rounded-xl bg-white object-contain"
 			/>
 		{:else}
 			<div
-				data-flip-id="image{$count.findIndex((obj) => obj.id == $page.params.slug)}"
-				class="grid aspect-square h-full place-items-center rounded-xl bg-muted"
+				data-flip-id="image{$itemIndex}"
+				class="grid aspect-square place-items-center rounded-xl bg-muted"
 			>
 				<span>No Image</span>
 			</div>
 		{/if}
+    <div>{$item.title}</div>
 	{:else}
 		{#await data.streamed.wishlist}
 			<Skeleton class="grid aspect-square" />
 		{:then wishlist}
 			<img
 				alt=""
-				src={wishlist.filter((obj) => obj.id == $page.params.slug)[0].image}
-				data-flip-id="image{wishlist.findIndex((obj) => obj.id == $page.params.slug)}"
+				src={itemStreamed.image}
+				data-flip-id="image{itemStreamedIndex}"
 				class="rounded-xl bg-white object-contain"
 			/>
 		{/await}
