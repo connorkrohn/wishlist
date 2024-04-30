@@ -21,6 +21,7 @@
 
 <div class="mx-auto flex w-full max-w-xl flex-col gap-4">
 	{#if data.isDataRequest && $count !== undefined}
+  <div class="aspect-square">
 		{#if $item.image}
 			<img
 				alt=""
@@ -36,17 +37,29 @@
 				<span>No Image</span>
 			</div>
 		{/if}
+    </div>
     <div>{$item.title}</div>
 	{:else}
 		{#await data.streamed.wishlist}
 			<Skeleton class="grid aspect-square" />
-		{:then wishlist}
+		{:then}
+    <div class="aspect-square">
+      {#if itemStreamed.image}
 			<img
 				alt=""
 				src={itemStreamed.image}
 				data-flip-id="image{itemStreamedIndex}"
-				class="rounded-xl bg-white object-contain"
+				class="aspect-square rounded-xl bg-white object-contain"
 			/>
+		{:else}
+			<div
+				data-flip-id="image{itemStreamedIndex}"
+				class="grid aspect-square place-items-center rounded-xl bg-muted"
+			>
+				<span>No Image</span>
+			</div>
+		{/if}
+    </div>
 		{/await}
 	{/if}
 </div>
