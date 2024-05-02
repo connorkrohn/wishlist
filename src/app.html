@@ -2,6 +2,9 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
+    <link rel="manifest" href="/manifest.json">
+    <script media="(prefers-color-scheme: light)">document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff');</script>
+    <script media="(prefers-color-scheme: dark)">document.querySelector('meta[name="theme-color"]').setAttribute('content', '#000000');</script>
 		<link rel="icon" href="%sveltekit.assets%/favicon.svg" type="image/svg+xml"/>
 		<link rel="icon" href="%sveltekit.assets%/favicon.png" type="image/png" media="(prefers-color-scheme: light)"/>
 		<link rel="icon" href="%sveltekit.assets%/favicon-dark.png" type="image/png" media="(prefers-color-scheme: dark)"/>
