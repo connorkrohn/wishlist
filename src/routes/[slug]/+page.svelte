@@ -28,7 +28,7 @@
 					alt=""
 					src={$item.image}
 					data-flip-id="image{$itemIndex}"
-					class="aspect-square rounded-xl bg-white object-contain"
+					class="w-full aspect-square rounded-xl bg-white object-contain"
 				/>
 			{:else}
 				<div
