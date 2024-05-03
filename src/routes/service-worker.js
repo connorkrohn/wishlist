@@ -1,5 +1,11 @@
 /// <reference types="@sveltejs/kit" />
+/// <reference no-default-lib="true"/>
+/// <reference lib="esnext" />
+/// <reference lib="webworker" />
 import { build, files, version } from '$service-worker';
+
+// type safety for 'self' by replacing it with 'sw'
+const sw = /** @type {ServiceWorkerGlobalScope} */ (/** @type {unknown} */ (self));
 
 // Create a unique cache name for this deployment
 const CACHE = `cache-${version}`;
@@ -9,7 +15,7 @@ const ASSETS = [
 	...files  // everything in `static`
 ];
 
-self.addEventListener('install', (event) => {
+sw.addEventListener('install', (event) => {
 	// Create a new cache and add all files to it
 	async function addFilesToCache() {
 		const cache = await caches.open(CACHE);
@@ -19,7 +25,7 @@ self.addEventListener('install', (event) => {
 	event.waitUntil(addFilesToCache());
 });
 
-self.addEventListener('activate', (event) => {
+sw.addEventListener('activate', (event) => {
 	// Remove previous cached data from disk
 	async function deleteOldCaches() {
 		for (const key of await caches.keys()) {
@@ -30,22 +36,22 @@ self.addEventListener('activate', (event) => {
 	event.waitUntil(deleteOldCaches());
 });
 
-self.addEventListener('fetch', (event) => {
+sw.addEventListener('fetch', (event) => {
 	// ignore POST requests etc
 	if (event.request.method !== 'GET') return;
 
 	async function respond() {
-		const url = new URL(event.request.url);
 		const cache = await caches.open(CACHE);
 
 		// `build`/`files` can always be served from the cache
-		if (ASSETS.includes(url.pathname)) {
-			const response = await cache.match(url.pathname);
+    // const url = new URL(event.request.url);
+		// if (ASSETS.includes(url.pathname)) {
+		// 	const response = await cache.match(url.pathname);
 
-			if (response) {
-				return response;
-			}
-		}
+		// 	if (response) {
+		// 		return response;
+		// 	}
+		// }
 
 		// for everything else, try the network first, but
 		// fall back to the cache if we're offline
@@ -58,6 +64,7 @@ self.addEventListener('fetch', (event) => {
 				throw new Error('invalid response from fetch');
 			}
 
+      // update cache with network response
 			if (response.status === 200) {
 				cache.put(event.request, response.clone());
 			}
