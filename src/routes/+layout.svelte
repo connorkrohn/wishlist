@@ -1,7 +1,7 @@
 <script lang="ts">
 	import type { LayoutData } from './$types';
 	import '../app.pcss';
-	import { ModeWatcher, toggleMode } from "mode-watcher";
+	import { ModeWatcher, toggleMode, mode } from "mode-watcher";
 	import { Button } from "$lib/components/ui/button";
 	import Logo from "$lib/assets/Logo.svelte"
 	import { count } from '$lib/stores';
@@ -50,8 +50,14 @@
 	});
 	
 </script>
-
 <ModeWatcher />
+<svelte:head>
+  {#if $mode == "dark"}
+    <meta name="theme-color" content="#09090b"/>
+  {:else}
+    <meta name="theme-color" content="#f7f7f8"/>
+  {/if}
+</svelte:head>
 
 <div class="fixed z-40 top-0 inset-x-0 h-32 text-background bg-gradient-to-b from-current to-transparent pointer-events-none"></div>
 
