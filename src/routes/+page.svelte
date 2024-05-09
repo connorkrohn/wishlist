@@ -67,7 +67,7 @@
 								<img
 									src={item.image}
 									alt=""
-									class="aspect-square rounded-lg bg-white object-contain"
+									class="w-full aspect-square rounded-lg bg-white object-contain"
 									loading="lazy"
 									data-flip-id="image{i}"
 								/>
