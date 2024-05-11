@@ -59,7 +59,7 @@
   {/if}
 </svelte:head>
 
-<div class="fixed z-40 top-0 inset-x-0 h-32 text-background bg-gradient-to-b from-current to-transparent pointer-events-none"></div>
+<!-- <div class="fixed z-40 top-0 inset-x-0 h-32 text-background bg-gradient-to-b from-current to-transparent pointer-events-none"></div> -->
 
 
 <header class="fixed z-50 flex gap-2 justify-between items-center top-0 left-1/2 -translate-x-1/2 h-12 my-4 mt-6 px-3 rounded-xl border bg-card text-card-foreground shadow-xl">
