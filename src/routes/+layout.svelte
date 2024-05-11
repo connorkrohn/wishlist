@@ -53,9 +53,9 @@
 <ModeWatcher />
 <svelte:head>
   {#if $mode == "dark"}
-    <meta name="theme-color" content="#09090b00"/>
+    <meta name="theme-color" content="rgba(9, 9, 11, 0)"/>
   {:else}
-    <meta name="theme-color" content="#f7f7f800"/>
+    <meta name="theme-color" content="rgba(247, 247, 248, 0)"/>
   {/if}
 </svelte:head>
 
