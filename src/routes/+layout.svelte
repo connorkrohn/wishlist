@@ -13,14 +13,14 @@
 
 	gsap.registerPlugin(Flip);
 	let state: Flip.FlipState;
-	let internalNav = false;
+	let internalNav: boolean | number = false;
 
 	onMount(async()=>{
 		count.set(await data.streamed.wishlist);
 	});
 	
 	beforeNavigate(() => {
-		internalNav = true;
+		internalNav = window.innerHeight;
 		state = Flip.getState("[data-flip-id]", {
 			props: "borderRadius",
 			simple: true,
@@ -31,10 +31,10 @@
 	});
 
 	afterNavigate(() => {
-		// if (internalNav) {
+	 if (typeof internalNav == "number") {
 		if(data.isDataRequest && $count !== undefined) {
 			for (const el of state.elementStates) {
-				el.matrix.f += window.scrollY;
+				el.matrix.f += window.scrollY - (40); //TODO test on firefox and safari
 			}
 			Flip.from(state, {
 				targets: document.querySelectorAll("[data-flip-id]"),
@@ -45,7 +45,7 @@
 				zIndex: 30,
 			});
 		}
-	// }
+	 }
 		internalNav = false;
 	});
 	
