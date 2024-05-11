@@ -34,7 +34,7 @@
 	 if (typeof internalNav == "number") {
 		if(data.isDataRequest && $count !== undefined) {
 			for (const el of state.elementStates) {
-				el.matrix.f += window.scrollY - (40); //TODO test on firefox and safari
+				el.matrix.f += window.scrollY - (internalNav - window.innerHeight); //TODO test on firefox and safari
 			}
 			Flip.from(state, {
 				targets: document.querySelectorAll("[data-flip-id]"),
@@ -53,9 +53,9 @@
 <ModeWatcher />
 <svelte:head>
   {#if $mode == "dark"}
-    <meta name="theme-color" content="#09090b"/>
+    <meta name="theme-color" content="#09090b00"/>
   {:else}
-    <meta name="theme-color" content="#f7f7f8"/>
+    <meta name="theme-color" content="#f7f7f800"/>
   {/if}
 </svelte:head>
 
